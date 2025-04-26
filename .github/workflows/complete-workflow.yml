@@ -33,7 +33,7 @@ jobs:
 
       - name: Debug Semantic Version
         run: |
-            echo "New version: ${{ steps.semantic_version.outputs.newVersion }}"   
+          echo "New version: ${{ steps.semantic_version.outputs.newVersion }}"
 
       - name: Update Maven Project Version
         run: mvn versions:set -DnewVersion=${{ steps.semantic_version.outputs.newVersion }}
@@ -52,8 +52,6 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
 
   release:
     runs-on: ubuntu-latest
