@@ -32,10 +32,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Debug Semantic Version
+        run: echo "New version: ${{ steps.semantic_version.outputs.newVersion }}"
+
       - name: Update Maven Project Version
         run: mvn versions:set -DnewVersion=${{ steps.semantic_version.outputs.newVersion }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify pom.xml Changes
+        run: cat pom.xml
+
+      - name: Check Git Status
+        run: git status
 
       - name: Build with Maven
         run: mvn -B verify
